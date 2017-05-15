@@ -28,7 +28,6 @@ func main() {
     data, _ := ioutil.ReadAll(resp.Body)
     temp := gjson.Get(string(data), "main.temp").Num
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        //Format
         fmt.Fprintf(w, "Current Raleigh temperature: %f \n", temp)
     })
     log.Print("Ready for weather requests..")
