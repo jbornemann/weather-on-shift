@@ -20,7 +20,7 @@ func main() {
     }
     san_key := strings.TrimSpace(string(key))
     log.Println("Requesting current weather..")
-    resp, err := http.Get(fmt.Sprint("http://api.openweathermap.org/data/2.5/weather?q=Raleigh&units=imperial&appid=", san_key))
+    resp, err := http.Get(fmt.Sprint("open-weathermap-service.myproject.svc/data/2.5/weather?q=Raleigh&units=imperial&appid=", san_key))
     if err != nil {
         log.Fatal("Something went wrong when attempting to get the weather")
         os.Exit(1)
