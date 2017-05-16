@@ -15,7 +15,7 @@ func main() {
     log.Println("Reading weather key file..")
     key, err := ioutil.ReadFile(KEY_FILE)
     if err != nil {
-        log.Fatal(fmt.Sprint("Could not read the weather api key from the secret %s", KEY_FILE))
+        log.Fatal(fmt.Sprint("Could not read the weather api key from the secret", KEY_FILE))
         os.Exit(1)
     }
     san_key := strings.TrimSpace(string(key))
