@@ -1,9 +1,6 @@
 apiVersion: v1
 kind: DeploymentConfig
 metadata:
-  annotations: {}
-  creationTimestamp: null
-  generation: 1
   labels:
     app: weather-on-shift
   name: weather-on-shift
@@ -24,14 +21,12 @@ spec:
     type: Rolling
   template:
     metadata:
-      annotations: {}
-      creationTimestamp: null
       labels:
         app: weather-on-shift
         deploymentconfig: weather-on-shift
     spec:
       containers:
-      - image: 172.30.1.1:5000/myproject/weather-on-shift@sha256:0354796ae8f51790a53b215611b581ae33a29d6a8481b50fbea1bfbdb0afb523
+      - image: 172.30.1.1:5000/myproject/weather-on-shift:latest
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -70,6 +65,4 @@ spec:
         secret:
           defaultMode: 420
           secretName: weather-on-shift-secret
-  test: false
   triggers: {}
-status: {}

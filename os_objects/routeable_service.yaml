@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
     name: weather-on-shift-service
+    labels:
+        app: weather-on-shift
 spec:
     selector:                  
         app: weather-on-shift

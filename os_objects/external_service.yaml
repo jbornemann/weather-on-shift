@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   name: open-weathermap-service
+  labels:
+      app: weather-on-shift
 spec:
   externalName: api.openweathermap.org
   ports: null
