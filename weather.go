@@ -8,6 +8,7 @@ import (
     "io/ioutil"
     "strings"
     "github.com/tidwall/gjson"
+    "time"
 )
 
 func main() {
@@ -28,6 +29,7 @@ func main() {
     data, _ := ioutil.ReadAll(resp.Body)
     temp := gjson.Get(string(data), "main.temp").Num
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        log.Println(fmt.Sprint("Received request from ", r.RemoteAddr, " at ", time.Now().String()))
         fmt.Fprintf(w, "Current Raleigh temperature: %f \n", temp)
     })
     log.Print("Ready for weather requests..")
