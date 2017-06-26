@@ -8,7 +8,7 @@ metadata:
 parameters:
 -
   name: KEY
-  description: "openweathermap API key"
+  description: "base64 encoded openweathermap API key"
   required: true
 - 
   name: PROJECT
@@ -83,6 +83,11 @@ objects:
       spec:
         containers:
         - image: "${IMAGE_REPO}/${PROJECT}/weather-on-shift:latest"
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

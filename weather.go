@@ -11,6 +11,12 @@ import (
     "time"
 )
 
+var (
+    //This environment variable is fed from the downward API. See the deployment configuration for details
+    ENVIRONMENT string = os.Getenv("NAMESPACE")
+)
+
+
 type WeatherSession struct {
     WeatherAPIKey string
     CurrentTemp   float64
@@ -36,8 +42,9 @@ func (session *WeatherSession) fetch_key() {
 
 func (session *WeatherSession) update_weather() {
     log.Println("Requesting current weather..")
-    resp, err := http.Get(fmt.Sprint("http://open-weathermap-service.myproject.svc/data/2.5/weather?q=Raleigh&units=imperial&appid=", session.WeatherAPIKey))
-    if err != nil {
+    //Note we use the external service endpoint here in the form open-weathermap-service.<namespace>.svc
+    resp, err := http.Get(fmt.Sprintf("http://open-weathermap-service.%s.svc/data/2.5/weather?q=Raleigh&units=imperial&appid=%s", ENVIRONMENT, session.WeatherAPIKey))
+    if err != nil || resp.StatusCode != 200 {
         log.Fatal("Something went wrong when attempting to get the weather")
         os.Exit(1)
     }
