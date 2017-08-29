@@ -10,7 +10,7 @@ parameters:
   name: KEY
   description: "base64 encoded openweathermap API key"
   required: true
-- 
+-
   name: PROJECT
   description: "Current project name"
   required: true
@@ -51,6 +51,22 @@ objects:
     triggers: []
   status:
     lastVersion: 0
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      app: weather-on-shift
+    name: weather-on-shift-pipeline
+  spec:
+    nodeSelector: null
+    strategy:
+      type: JenkinsPipeline
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: pipeline
+    source:
+      type: Git
+      git:
+        uri: https://github.com/jbornemann/weather-on-shift
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
