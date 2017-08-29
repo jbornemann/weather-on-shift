@@ -1,6 +1,6 @@
 node {
   stage("build") {
     echo "Building Weather On Shift!"
-    openshiftBuild buildConfig: weather-on-shift, showBuildLogs: "true", verbose: verbose
+    openshiftBuild buildConfig: "weather-on-shift", showBuildLogs: "true", verbose: "verbose"
   }
 }

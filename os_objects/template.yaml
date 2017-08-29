@@ -62,7 +62,7 @@ objects:
     strategy:
       type: JenkinsPipeline
       jenkinsPipelineStrategy:
-        jenkinsfilePath: pipeline
+        jenkinsfilePath: pipeline/Jenkinsfile
     source:
       type: Git
       git:
