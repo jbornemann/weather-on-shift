@@ -6,6 +6,9 @@ metadata:
   name: weather-on-shift-pipeline
 spec:
   nodeSelector: null
+  source:
+    git:
+      uri: https://github.com/jbornemann/weather-on-shift 
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
