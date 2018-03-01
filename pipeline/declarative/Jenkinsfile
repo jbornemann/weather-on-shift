@@ -1,0 +1,31 @@
+pipeline {
+    agent none
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    openshift.withCluster('default') {
+                        def ocDir = tool "oc"
+                        withEnv(["PATH+OC=${ocDir}"]) {
+                            def status = openshift.startBuild('weather-on-shift')
+                            status.logs('-f')
+                        }
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                script {
+                    openshift.withCluster('default') {
+                        def ocDir = tool "oc"
+                        withEnv(["PATH+OC=${ocDir}"]) {
+                            openshift.selector("dc/weather-on-shift").deploy()
+                        }
+                    }    
+                }
+            }
+        }
+    }
+}
+
