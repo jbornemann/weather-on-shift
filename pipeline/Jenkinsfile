@@ -1,4 +1,4 @@
-node {
+node('maven') {
   stage("build") {
     echo "Building Weather On Shift!"
     openshiftBuild buildConfig: "weather-on-shift", showBuildLogs: "true", verbose: "verbose"
