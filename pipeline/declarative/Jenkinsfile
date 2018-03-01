@@ -20,8 +20,10 @@ pipeline {
                     openshift.withCluster('default') {
                         def ocDir = tool "oc"
                         withEnv(["PATH+OC=${ocDir}"]) {
-                            openshift.selector("dc/weather-on-shift").deploy()
-                        }
+                            def selector = openshift.selector("dc/weather-on-shift")
+                            def result = selector.rollout().latest()
+                            echo "${result.out}"
+						}
                     }    
                 }
             }
