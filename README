@@ -1,6 +1,6 @@
-Sample OpenShift application demonstrating external services
+Sample OpenShift/Kubernetes application demonstrating various features
 
 Some notes:
 
-- To recreate project in OpenShift, use the objects defined in the os_objects folder. In the secret object, you will need to specify your own base64 encoded openweathermap API key.
+- To recreate project in OpenShift/Kubernetes, use the objects defined in the os_objects folder. In the secret object, you will need to specify your own base64 encoded openweathermap API key.
 - The s2i-go s2i builder image at time of writing is not currently in Docker Hub. You can build it yourself from here: https://github.com/openshift-s2i/s2i-go
