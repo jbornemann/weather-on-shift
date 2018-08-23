@@ -9,7 +9,7 @@ import (
     "strings"
     "github.com/tidwall/gjson"
     "time"
-	"strconv"
+    "strconv"
 )
 
 var (
@@ -21,25 +21,25 @@ var (
 type WeatherSession struct {
     WeatherAPIKey string
     CurrentTemp   float64
-	FetchIntervalMinutes uint32
+    FetchIntervalMinutes uint32
 }
 
 func NewWeatherSession() (*WeatherSession) {
     log.Println("Creating new weather session")
-	weather_session := &WeatherSession{}
+    weather_session := &WeatherSession{}
     log.Println("Fetching key..")
-	weather_session.fetch_key()
-	log.Println("Updating weather store..")
+    weather_session.fetch_key()
+    log.Println("Updating weather store..")
     weather_session.update_weather()
-	fetch_update_env := os.Getenv("UPDATE_INTERVAL_MINUTES")
-	if fetch_update, err := strconv.Atoi(fetch_update_env); err == nil && fetch_update > 0 {
-		weather_session.FetchIntervalMinutes = uint32(fetch_update)
-		log.Println("Setting update interval to ", fetch_update_env, " minutes")
-	} else {
-		weather_session.FetchIntervalMinutes = 60
-		log.Println("No update interval set. Defaulting to an hour")
-	}
-	return weather_session
+    fetch_update_env := os.Getenv("UPDATE_INTERVAL_MINUTES")
+    if fetch_update, err := strconv.Atoi(fetch_update_env); err == nil && fetch_update > 0 {
+        weather_session.FetchIntervalMinutes = uint32(fetch_update)
+        log.Println("Setting update interval to ", fetch_update_env, " minutes")
+    } else {
+        weather_session.FetchIntervalMinutes = 60
+        log.Println("No update interval set. Defaulting to an hour")
+    }
+    return weather_session
 }
 
 func (session *WeatherSession) fetch_key() {
@@ -77,7 +77,7 @@ func serve_weather(weather *WeatherSession) {
 
 func update_timer(session *WeatherSession) {
     for {
-		sleep_time := time.Duration(session.FetchIntervalMinutes) * time.Minute
+        sleep_time := time.Duration(session.FetchIntervalMinutes) * time.Minute
         time.Sleep(sleep_time)
         session.update_weather()
     }
