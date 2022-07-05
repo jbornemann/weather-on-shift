@@ -57,8 +57,12 @@ func (session *WeatherSession) update_weather() {
     log.Println("Requesting current weather..")
     //Note we use the external service endpoint here in the form open-weathermap-service.<namespace>.svc
     resp, err := http.Get(fmt.Sprintf("http://open-weathermap-service.%s.svc/data/2.5/weather?q=Raleigh&units=imperial&appid=%s", ENVIRONMENT, session.WeatherAPIKey))
-    if err != nil || resp.StatusCode != 200 {
-        log.Fatal("Something went wrong when attempting to get the weather")
+    if err != nil {
+        log.Fatal(fmt.Sprintf("Could not get the weather: %s", err.Error()))
+        os.Exit(1)
+    }
+    if resp.StatusCode != 200 {
+        log.Fatal(fmt.Sprintf("Something went wrong when attempting to get the weather, go status code %d", resp.StatusCode))
         os.Exit(1)
     }
     data, _ := ioutil.ReadAll(resp.Body)
