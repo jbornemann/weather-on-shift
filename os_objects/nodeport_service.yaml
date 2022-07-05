@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-07-05T16:36:15Z"
+  labels:
+    run: weather-on-shift
+  name: weather-on-shift-np
+  namespace: weather
+  resourceVersion: "2675"
+  uid: f938e3d1-992a-46ee-92bc-de824230bb35
+spec:
+  clusterIP: 10.102.211.32
+  clusterIPs:
+  - 10.102.211.32
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31862
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: weather-on-shift
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
